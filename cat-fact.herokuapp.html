@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>cat facts</title>
+  </head>
+  <body>
+    <button type="button" onclick="loadDoc()">Request Cat Facts</button>
+    <p id="demo"></p>
+    <script>
+      function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          var data = JSON.parse(this.responseText);
+          var facts = ""
+          data.forEach(element => {
+            facts = facts + "<br><br>" + element.text 
+          });
+
+          document.getElementById("demo").innerHTML = facts;
+        };
+        xhttp.open("GET", "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=20");
+        xhttp.send();
+      }
+    </script>
+  </body>
+</html>

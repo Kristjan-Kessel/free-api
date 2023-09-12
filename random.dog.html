@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dogs</title>
+  </head>
+  <body>
+    <button type="button" onclick="loadDoc()">Request Dog</button>
+    <br>
+    <br>
+    <img style="width: 400px" id="demoimg"></img>
+    <vid style="width: 400px"  id="demovid"></vid>
+    <script>
+      function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          var data = JSON.parse(this.responseText);
+          //data = JSON.stringify(data);
+          if(data.url.endsWith(".mp4")){
+            document.getElementById("demovid").src = data.url;
+          }else{
+            document.getElementById("demoimg").src = data.url;
+          }
+          
+        };
+        xhttp.open("GET", "https://random.dog/woof.json");
+        xhttp.send();
+      }
+    </script>
+  </body>
+</html>
